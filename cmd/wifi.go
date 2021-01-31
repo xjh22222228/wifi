@@ -37,24 +37,40 @@ func GetSSID() (string, error)  {
             return "", err
         }
 
-        c := exec.Command(path, "-I")
-
-        v, err := c.CombinedOutput()
+        v, err := exec.Command(path, "-I").CombinedOutput()
 
         if err != nil {
-            fmt.Print(err)
             return "", err
         }
 
         str := string(v)
         regex, _ := regexp.Compile(" SSID: (.*)")
-        f := regex.FindStringSubmatch(str)
+        match := regex.FindStringSubmatch(str)
 
-        if len(f) < 2 {
+        if len(match) < 2 {
             return "", errors.New("SSID: not found")
         }
 
-        return f[1], nil
+        return match[1], nil
+    }
+
+
+    if platform == "windows" {
+        v, err := exec.Command("cmd", "/C",
+            "CHCP 65001 && netsh wlan show interfaces | findstr SSID").CombinedOutput()
+        if err != nil {
+            return "", err
+        }
+
+        str := string(v)
+        regex, _ := regexp.Compile(` SSID\S*:\S?(.*)`)
+        match := regex.FindStringSubmatch(str)
+
+        if len(match) < 2 {
+            return "", errors.New("SSID: Not found")
+        }
+
+        return strings.TrimSpace(match[1]), nil
     }
 
     return "", errors.New("SSID: not found")
@@ -74,6 +90,26 @@ func GetPass(ssid string) (string, error) {
             return "", errors.New("permission denied")
         }
         return strings.TrimSpace(string(o)), nil
+    }
+
+    if platform == "windows" {
+        v, err := exec.Command("cmd", "/C",
+            `CHCP 65001 && netsh wlan show profile name="`, ssid,
+            `" key=clear | findstr Key`).CombinedOutput()
+
+        if err != nil {
+            return "", err
+        }
+
+        str := string(v)
+        regex, _ := regexp.Compile(` Content\s*:\s?(.*)`)
+        match := regex.FindStringSubmatch(str)
+
+        if len(match) < 2 {
+            return "", errors.New("password: Not found")
+        }
+
+        return strings.TrimSpace(match[1]), nil
     }
 
     return "", errors.New("password: Not found")

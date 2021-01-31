@@ -28,6 +28,13 @@ Shell (Mac):
 curl -fsSL https://raw.githubusercontent.com/xjh22222228/wifi/main/install.sh | bash
 ```
 
+Windows:
+
+[Download](https://github.com/xjh22222228/wifi/releases/latest/download/wifi_windows_amd64.zip)
+```
+./wifi.exe
+```
+
 
 
 
