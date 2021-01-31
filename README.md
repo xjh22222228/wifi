@@ -1,7 +1,7 @@
 
 <p align="center">
   <p align="center">
-    <img src="media/logo.png" width="200" />
+    <img src="media/logo.svg" width="200" />
   </p>
   <p align="center">
     <b>wifi</b>
