@@ -1,7 +1,5 @@
 #!/bin/bash
 
-version=1.0.0
-
 GOARCH=amd64
 
 macBuildName=wifi_darwin_${GOARCH}

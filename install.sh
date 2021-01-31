@@ -13,21 +13,19 @@ if ! command -v tar >/dev/null; then
 fi
 
 goos=$(uname)
-version=1.0.0
 
 install() {
-  file_name=wifi_${version}_${goos}_amd64
+  file_name=wifi_${goos}_amd64
   suffix=.tar.gz
   download_name="${file_name}${suffix}"
-  uri=https://github.com/xjh22222228/wifi/releases/latest/download/$
-  {download_name}
+  uri=https://github.com/xjh22222228/wifi/releases/latest/download/${download_name}
 
   echo -e "Download ${uri} \n"
 
   # Remove current pkg
   rm -f "$download_name"
 
-  curl "uri" -OL --progress --retry 2 2>&1
+  curl "$uri" -OL --progress --retry 2 2>&1
 
   if [ $? -ne 0 ]; then
     rm -f "${download_name}"
