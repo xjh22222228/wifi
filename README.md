@@ -1,6 +1,9 @@
 
 <p align="center">
   <p align="center">
+    <img src="media/logo.png" width="200" />
+  </p>
+  <p align="center">
     <b>wifi</b>
   </p>
   <p align="center">Quickly fetch your WiFi password and if needed, generate a QR code of your WiFi to allow phones to easily connect.</p>
@@ -19,7 +22,6 @@
 
 
 ## Installation
-Deno ships as a single executable with no dependencies. You can install it using the installers below, or download a release binary from the [releases page](https://github.com/xjh22222228/python-check-updates/releases).
 
 Shell (Mac):
 ```
@@ -38,6 +40,7 @@ curl -fsSL https://raw.githubusercontent.com/xjh22222228/wifi/main/install.sh | 
 -v, --version          Output the version number
 -p, --password         Print Password
 -s, --ssid             Specify a SSID that you have previously connected to
+-h, --help             Display help for command
 ```
 
 ## Example
