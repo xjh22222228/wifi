@@ -24,8 +24,11 @@
 ## Installation
 
 Shell (Mac):
-```
+```bash
 curl -fsSL https://raw.githubusercontent.com/xjh22222228/wifi/main/install.sh | bash
+
+# or
+curl -fsSL https://raw.sevencdn.com/xjh22222228/wifi/main/install.sh | bash
 ```
 
 Windows:

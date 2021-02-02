@@ -44,7 +44,7 @@ install() {
   chmod +x wifi_build/$file_name
   rm -f "${download_name}"
 
-  cp wifi_build/$file_name /usr/local/bin/wifi
+  mv -f wifi_build/$file_name /usr/local/bin/wifi
   rm -rf wifi_build
 }
 
