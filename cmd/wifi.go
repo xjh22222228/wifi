@@ -63,7 +63,12 @@ func GetSSID() (string, error)  {
         }
 
         str := string(v)
-        regex, _ := regexp.Compile(` SSID\S*:\S?(.*)`)
+        regex, err := regexp.Compile(`\s*SSID\s*:\s?(.*)`)
+
+        if err != nil {
+            return "", errors.New("REGEXP error")
+        }
+
         match := regex.FindStringSubmatch(str)
 
         if len(match) < 2 {
@@ -73,7 +78,7 @@ func GetSSID() (string, error)  {
         return strings.TrimSpace(match[1]), nil
     }
 
-    return "", errors.New("SSID: not found")
+    return "", errors.New("SSID: This platform is not supported")
 }
 
 func GetPass(ssid string) (string, error) {
@@ -93,12 +98,11 @@ func GetPass(ssid string) (string, error) {
     }
 
     if platform == "windows" {
-        v, err := exec.Command("cmd", "/C",
-            `CHCP 65001 && netsh wlan show profile name="`, ssid,
-            `" key=clear | findstr Key`).CombinedOutput()
+        c := fmt.Sprintf("CHCP 65001 && netsh wlan show profile name=%v key=clear | findstr Key", ssid)
+        v, err := exec.Command("cmd", "/C", c).CombinedOutput()
 
         if err != nil {
-            return "", err
+            return "", errors.New("command exec error")
         }
 
         str := string(v)
@@ -112,7 +116,7 @@ func GetPass(ssid string) (string, error) {
         return strings.TrimSpace(match[1]), nil
     }
 
-    return "", errors.New("password: Not found")
+    return "", errors.New("password: This platform is not supported")
 }
 
 func Qrcode(ssid, pwd string, isOut bool)  {
@@ -155,7 +159,7 @@ func main()  {
     ssid, err := GetSSID()
 
     if err != nil {
-        fmt.Printf("SSID: %T", err)
+        fmt.Println(err)
         return
     }
 
