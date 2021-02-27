@@ -4,6 +4,7 @@ import (
     "errors"
     "flag"
     "fmt"
+    "github.com/fatih/color"
     "github.com/skip2/go-qrcode"
     "log"
     "os"
@@ -164,7 +165,7 @@ func main()  {
     }
 
     if flagSSID {
-        fmt.Println("SSID: " + ssid)
+        fmt.Println("SSID: " + color.RedString(ssid))
         return
     }
 
@@ -185,5 +186,5 @@ func main()  {
         return
     }
 
-    fmt.Println("password: " + password)
+    fmt.Println("password: ", color.RedString(password))
 }
