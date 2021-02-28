@@ -25,7 +25,7 @@ var (
 )
 
 const (
-    Version = "v1.0.2"
+    Version = "v1.0.3"
 )
 
 func GetSSID() (string, error)  {
