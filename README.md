@@ -1,9 +1,6 @@
 
 <p align="center">
   <p align="center">
-    <img src="media/logo.svg" width="200" />
-  </p>
-  <p align="center">
     <b>wifi</b>
   </p>
   <p align="center">Quickly fetch your WiFi password and if needed, generate a QR code of your WiFi to allow phones to easily connect.</p>
@@ -17,7 +14,7 @@
 
 
 ## Demo
-![](media/screenshot.png)
+![Preview](https://raw.githubusercontent.com/xjh22222228/public/gh-pages/wifi/screenshot.gif)
 
 
 

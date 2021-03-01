@@ -121,7 +121,8 @@ func GetPass(ssid string) (string, error) {
 }
 
 func Qrcode(ssid, pwd string, isOut bool)  {
-    text := "WIFI:T:WPA;S:" + ssid + ";P:" + pwd + ";;"
+    // https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
+    text := fmt.Sprintf(`WIFI:T:WPA;S:%v;P:%v;;`, ssid, pwd)
     qr, _ := qrcode.New(text, qrcode.Medium)
 
     if isOut {
